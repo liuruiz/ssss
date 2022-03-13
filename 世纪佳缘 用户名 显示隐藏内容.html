@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 世纪佳缘 用户名 显示隐藏内容 -->
+    <input type="text" value='世纪佳缘'>
+    <script>
+        var input = document.querySelector('input');
+        input.onfocus = function() {
+            if (input.value == '世纪佳缘') {
+                input.value = '';
+            }
+        }
+
+        input.onblur = function() {
+            if (input.value == '')
+                input.value = '世纪佳缘';
+
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        li {
+            list-style: none;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        .focus {
+            position: relative;
+            width: 721px;
+            height: 455px;
+            background: purple;
+            overflow: hidden;
+        }
+        
+        .focus ul {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 600%;
+        }
+        
+        .focus ul li {
+            float: left;
+        }
+        
+        .arrow-l,
+        .arrow-r {
+            display: none;
+            position: absolute;
+            top: 50%;
+            width: 24px;
+            height: 40px;
+            margin-top: -20px;
+            line-height: 40px;
+            text-align: center;
+            background: rgb(0, 0, 0, .3);
+            color: #fff;
+            z-index: 1;
+        }
+        
+        .circle {
+            position: absolute;
+            bottom: 10px;
+            left: 50px;
+        }
+        
+        .arrow-r {
+            right: 0;
+        }
+        
+        .circle li {
+            float: left;
+            width: 8px;
+            height: 8px;
+            border: 2px solid rgb(0, 0, 0, .5);
+            margin: 0 3px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .current {
+            background: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="focus fl">
+        <!-- 左侧按钮 -->
+        <a href="javascript:;" class="arrow-l">
+            &lt;
+         </a>
+        <!-- 右侧按钮 -->
+        <a href="javascript:;" class="arrow-r"> &gt; </a>
+        <!-- 核心的滚动区域 -->
+        <ul>
+            <li>
+                <a href="#"><img src="./image/focus.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="./image/focus1.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="./image/focus2.jpg" alt=""></a>
+            </li>
+            <li>
+                <a href="#"><img src="./image/focus3.jpg" alt=""></a>
+            </li>
+        </ul>
+        <!-- 小圆圈 -->
+        <ol class="circle">
+
+        </ol>
+    </div>
+    <script src='animate.js'></script>
+    <script>
+        var focus = document.querySelector('.focus');
+        var arrow_l = document.querySelector('.arrow-l');
+        var arrow_r = document.querySelector('.arrow-r');
+        var focusWidth = focus.offsetWidth;
+        focus.addEventListener('mouseenter', function() {
+            arrow_l.style.display = 'block';
+            arrow_r.style.display = 'block';
+            clearInterval(timer);
+            timer = null;
+        })
+        focus.addEventListener('mouseleave', function() {
+            arrow_l.style.display = 'none';
+            arrow_r.style.display = 'none';
+            timer = setInterval(function() {
+                arrow_r.click();
+            }, 2000)
+        })
+
+        var ul = focus.querySelector('ul');
+        var ol = focus.querySelector('ol');
+        for (var i = 0; i < ul.children.length; i++) {
+            var li = document.createElement('li');
+            li.setAttribute('index', i);
+            ol.appendChild(li);
+            li.addEventListener('click', function() {
+                for (var i = 0; i < ol.children.length; i++) {
+                    ol.children[i].className = '';
+                }
+                this.className = 'current';
+                var index = this.getAttribute('index');
+                num = circle = index;
+                animate(ul, -index * focusWidth);
+            })
+        }
+        ol.children[0].className = 'current';
+        var num = 0;
+        var circle = 0;
+        var flag = true;
+        var first = ul.children[0].cloneNode(true);
+        ul.appendChild(first);
+        arrow_r.addEventListener('click', function() {
+            if (flag) {
+                flag = false;
+                if (num == ul.children.length - 1) {
+                    num = 0;
+                    ul.style.left = 0;
+                }
+                num++;
+                animate(ul, -num * focusWidth, function() {
+                    flag = true;
+                });
+                circle++;
+                if (circle == ul.children.length - 1) {
+                    circle = 0;
+                }
+                circleChagen();
+
+            }
+        })
+
+        arrow_l.addEventListener('click', function() {
+            if (flag) {
+                flag = false;
+                if (num == 0) {
+                    num = ul.children.length - 1;
+                    ul.style.left = -num * focusWidth + 'px';
+
+                }
+                num--;
+                animate(ul, -num * focusWidth, function() {
+                    flag = true;
+                })
+                circle--;
+                if (circle < 0) {
+                    circle = ol.children.length - 1;
+                }
+                circleChagen();
+            }
+        })
+
+        function circleChagen() {
+
+            for (var i = 0; i < ol.children.length; i++) {
+                ol.children[i].className = '';
+            }
+            ol.children[circle].className = 'current';
+        }
+
+        var timer = setInterval(function() {
+            arrow_r.click();
+        }, 2000)
+    </script>
+</body>
+
+</html>

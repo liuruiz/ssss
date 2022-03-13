@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            position: relative;
+            width: 400px;
+            margin: 100px auto;
+            border-bottom: 1px solid rgb(0, 0, 0, .1);
+        }
+        
+        .box input {
+            width: 370px;
+            height: 30px;
+            border: 0;
+            outline: none;
+        }
+        
+        .box img {
+            position: absolute;
+            top: 2px;
+            right: 4px;
+            width: 24px;
+        }
+        
+        .box1 {
+            width: 30px;
+            height: 100px;
+            background-color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div class='box'>
+        <label for="">
+            <img src="./image/close.png" alt="" id='eye'  class='s'>
+        </label>
+        <input type="password" id='pwd'>
+    </div>
+    <div class='box1'></div>
+    <script>
+        var eye = document.getElementById('eye');
+        var pwd = document.getElementById('pwd');
+        var flag = 0;
+        eye.onclick = function() {
+            if (flag == 0) {
+                eye.src = './image/open.png';
+                pwd.type = 'text';
+                flag = 1; //赋值操作，让下次点击的时候变成关闭
+            } else {
+                eye.src = './image/close.png';
+                pwd.type = 'password';
+                flag = 0;
+            }
+        }
+        var div = document.querySelector('.box1');
+        div.style.height = '25px';
+        div.style.backgroundColor = 'red';
+    </script>
+</body>
+
+</html>

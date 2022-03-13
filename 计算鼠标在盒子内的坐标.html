@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 500px;
+            height: 500px;
+            background: pink;
+            margin: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box"></div>
+    <script>
+        var div = document.querySelector('.box');
+        div.addEventListener('mousemove', function(e) {
+            var x = e.pageX - div.offsetLeft;
+            var y = e.pageY - div.offsetTop;
+            div.innerHTML = 'x的坐标：' + x + '，y的坐标：' + y;
+        })
+    </script>
+</body>
+
+</html>

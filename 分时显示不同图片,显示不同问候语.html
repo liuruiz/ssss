@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 根据不同时间，页面显示不同图片，同时显示不同的问候语。
+如果上午时间打开页面，显示上午好，显示上午的图片。
+如果下午时间打开页面，显示下午好，显示下午的图片。
+如果晚上时间打开页面，显示晚上好，显示晚上的图片。 -->
+    <img src="./image/s.gif" alt="">
+    <div>上午好</div>
+    <script>
+        //1.获取元素
+        var img = document.querySelector('img');
+        var div = document.querySelector('div');
+        //得到当前的小时数
+        var date = new Date();
+        var h = date.getHours();
+
+        //判断当前时间段来修改图片和文字
+        if (h < 12) {
+            img.src = './image/s.gif';
+            div.innerText = '上午好';
+        } else if (h < 18) {
+            img.src = './image/x.gif';
+            div.innerText = '下午好';
+        } else {
+            img.src = './image/w.gif';
+            div.innerText = '晚上好';
+        }
+    </script>
+</body>
+
+</html>

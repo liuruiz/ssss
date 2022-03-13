@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        table {
+            width: 300px;
+            margin: 100px auto;
+            border: 1px solid rgb(0, 0, 0, .1);
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+        
+        th,
+        td {
+            border: 1px solid rgb(0, 0, 0, .1);
+            padding: 10px;
+            color: #404060;
+        }
+        
+        th {
+            background: skyblue;
+            font: bold 16px '微软雅黑';
+            color: white;
+        }
+        
+        td {
+            font: 14px '微软雅黑';
+        }
+        
+        tbody tr {
+            background: #f0f0f0;
+            cursor: pointer;
+        }
+        
+        tbody tr:hover {
+            background: #fafafa;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" id='j_cbAll'>
+                </th>
+                <th>
+                    商品
+                </th>
+                <th>
+                    价钱
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody id='j_cb'>
+            <tr>
+                <td>
+                    <input type="checkbox">
+                </td>
+                <td>iphone8</td>
+                <td>8000</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox">
+                </td>
+                <td>ipad pro</td>
+                <td>5000</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox">
+                </td>
+                <td>ipad air</td>
+                <td>2000</td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="checkbox">
+                </td>
+                <td>apple watch</td>
+                <td>2000</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        var j_cbAll = document.querySelector('#j_cbAll');
+        var j_cbs = document.querySelector('#j_cb').getElementsByTagName('input');
+
+        j_cbAll.onclick = function() {
+            for (var i = 0; i < j_cbs.length; i++) {
+                j_cbs[i].checked = this.checked
+            }
+        }
+
+        for (var i = 0; i < j_cbs.length; i++) {
+            j_cbs[i].onclick = function() {
+                var flag = true;
+                for (var i = 0; i < j_cbs.length; i++) {
+                    if (!j_cbs[i].checked) {
+                        flag = false;
+                        break;
+                    }
+                }
+                j_cbAll.checked = flag;
+            }
+        }
+    </script>
+</body>
+
+</html>
